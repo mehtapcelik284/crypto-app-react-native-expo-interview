@@ -1,3 +1,10 @@
 {
-  "app_name": "Kriptok"
+  "app_name": "Kriptok",
+  "tabs": {
+    "home": "Home",
+    "browse": "Browse"
+  },
+  "browse": {
+    "detail": "Detail {{id}}"
+  }
 }

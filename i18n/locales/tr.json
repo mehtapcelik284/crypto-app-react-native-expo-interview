@@ -1,3 +1,10 @@
 {
-  "app_name": "Kriptok"
+  "app_name": "Kriptok",
+  "tabs": {
+    "home": "Ana Sayfa",
+    "browse": "Göz At"
+  },
+  "browse": {
+    "detail": "Detay {{id}}"
+  }
 }
