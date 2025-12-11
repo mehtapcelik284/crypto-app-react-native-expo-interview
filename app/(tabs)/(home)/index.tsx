@@ -1,9 +1,11 @@
 import { useRouter } from "expo-router";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Button, StyleSheet, Text, View } from "react-native";
 
 const HomeScreen = () => {
   const router = useRouter();
+  const { t } = useTranslation();
 
   const handleNavigateToNetworks = () => {
     router.push("/select-networks");
@@ -11,11 +13,8 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}></Text>
-      <Button
-        title="Select Network"
-        onPress={handleNavigateToNetworks}
-      />
+      <Text style={styles.title}>{t("home")}</Text>
+      <Button title={t("select_networks.title")} onPress={handleNavigateToNetworks} />
     </View>
   );
 };

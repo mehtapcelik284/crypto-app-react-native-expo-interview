@@ -16,8 +16,8 @@ export default ({ config }: ConfigContext): ExpoConfig => {
   return {
     ...config,
 
-    name: `MyApp (${appEnv})`,
-    slug: "my-app",
+    name: `Kriptok (${appEnv})`,
+    slug: "kriptok",
 
     extra: {
       APP_ENV: appEnv,

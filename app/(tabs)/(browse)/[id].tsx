@@ -9,7 +9,7 @@ const BrowseDetailScreen = () => {
   const { t } = useTranslation();
 
   useLayoutEffect(() => {
-    const dynamicTitle = t("browse.detail.title", { id: id });
+    const dynamicTitle = t("browse.detail", { id: id });
 
     navigation.setOptions({ title: dynamicTitle });
   }, [navigation, id, t]);

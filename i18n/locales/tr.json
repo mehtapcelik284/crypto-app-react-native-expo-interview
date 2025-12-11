@@ -4,7 +4,13 @@
     "home": "Ana Sayfa",
     "browse": "Göz At"
   },
+  "home": {
+    "title": "Ana Sayfa"
+  },
   "browse": {
     "detail": "Detay {{id}}"
+  },
+  "select_networks": {
+    "title": "Ağ Seç"
   }
 }

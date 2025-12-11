@@ -4,7 +4,13 @@
     "home": "Home",
     "browse": "Browse"
   },
+  "home": {
+    "title": "Home"
+  },
   "browse": {
     "detail": "Detail {{id}}"
+  },
+  "select_networks": {
+    "title": "Select Networks"
   }
 }
