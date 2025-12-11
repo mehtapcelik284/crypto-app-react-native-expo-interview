@@ -42,5 +42,7 @@ app-example
 /ios
 /android
 
-
-.env
+# environment files
+.env.development
+.env.staging
+.env.production
