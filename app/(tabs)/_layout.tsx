@@ -1,5 +1,5 @@
-import { IconSymbol } from "@/components/ui/icon-symbol";
 import { CustomTheme } from "@/constants/theme";
+import { Ionicons } from "@expo/vector-icons";
 import { ThemeProvider } from "@react-navigation/native";
 import { Tabs } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -18,8 +18,12 @@ export default function TabsLayout() {
           options={{
             headerShown: false,
             title: t("tabs.home"),
-            tabBarIcon: ({ color }) => (
-              <IconSymbol size={28} name="house.fill" color={color} />
+            tabBarIcon: ({ color, focused }) => (
+              <Ionicons
+                name={focused ? "home" : "home-outline"}
+                size={24}
+                color={color}
+              />
             ),
           }}
         />
@@ -28,15 +32,16 @@ export default function TabsLayout() {
           options={{
             headerShown: false,
             title: t("tabs.browse"),
-            tabBarIcon: ({ color }) => (
-              <IconSymbol size={28} name="globe" color={color} />
+            tabBarIcon: ({ color, focused }) => (
+              <Ionicons
+                name={focused ? "globe" : "globe-outline"}
+                size={24}
+                color={color}
+              />
             ),
           }}
         />
-        <Tabs.Screen
-          name="index"
-          redirect
-        />
+        <Tabs.Screen name="index" redirect />
       </Tabs>
     </ThemeProvider>
   );
