@@ -1,9 +1,10 @@
-import { Network } from "@/constants/networks";
+import { Asset } from "@/constants/assets";
+import { Colors, Fonts } from "@/constants/theme";
 import {
-  randomBalance,
-  randomPercentage,
-  randomPriceTRY,
-} from "@/utils/randomValues";
+  formatFiatValue,
+  formatPercentage,
+  formatTokenBalance,
+} from "@/utils/formatters";
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -12,113 +13,136 @@ import {
 import { Image } from "expo-image";
 import { StyleSheet, Text, View } from "react-native";
 
-const AssetItem = ({ network }: { network: Network }) => {
-  const price = randomPriceTRY();
-  const change = randomPercentage();
-  const balance = randomBalance();
-  const balanceTRY = randomPriceTRY();
-  const iconSource = network.icon;
+const AssetItem = ({ asset }: { asset: Asset }) => {
+  const {
+    icon,
+    symbol,
+    name,
+    priceTRY,
+    changePercentage,
+    balance,
+    balanceSymbol,
+    balanceFiat,
+  } = asset;
 
   return (
-    <View style={networkStyles.item}>
-      <View style={networkStyles.iconWrapper}>
-        {iconSource ? (
-          <Image source={iconSource} style={networkStyles.icon} />
-        ) : (
-          <View style={networkStyles.iconPlaceholder} />
-        )}
-      </View>
-
-      <View style={networkStyles.textContainer}>
-        <Text style={networkStyles.name}>{network.name}</Text>
-
-        <View style={networkStyles.subRow}>
-          <Text style={networkStyles.priceText}>₺ {price}</Text>
-
-          <View style={networkStyles.changePill}>
-            <Text style={networkStyles.changeText}>+{change}</Text>
+    <View style={styles.item}>
+      <View style={styles.leftSection}>
+        <View style={styles.iconWrapper}>
+          <Image source={icon} style={styles.icon} />
+        </View>
+        <View style={styles.textContainer}>
+          <View style={styles.nameRow}>
+            <Text style={styles.symbol}>{symbol}</Text>
+            <View style={styles.assetTag}>
+              <Text style={styles.assetTagText}>{name}</Text>
+            </View>
+          </View>
+          <View style={styles.metaRow}>
+            <Text style={styles.priceText}>{formatFiatValue(priceTRY)}</Text>
+            <View style={styles.changePill}>
+              <Text style={styles.changeText}>
+                {formatPercentage(changePercentage)}
+              </Text>
+            </View>
           </View>
         </View>
       </View>
 
-      <View style={networkStyles.balanceContainer}>
-        <Text style={networkStyles.balanceMain}>
-          {balance} {network.name}
+      <View style={styles.balanceContainer}>
+        <Text style={styles.balanceMain}>
+          {formatTokenBalance(balance)} {balanceSymbol}
         </Text>
-        <Text style={networkStyles.balanceSub}>₺ {balanceTRY}</Text>
+        <Text style={styles.balanceSub}>{formatFiatValue(balanceFiat)}</Text>
       </View>
     </View>
   );
 };
 
-const networkStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   item: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: responsiveHeight(15),
-    paddingHorizontal: responsiveWidth(15),
+    paddingVertical: responsiveHeight(12),
+  },
+  leftSection: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1,
+    marginRight: responsiveWidth(12),
   },
   iconWrapper: {
-    marginRight: responsiveWidth(15),
-    paddingHorizontal: responsiveWidth(8),
+    marginRight: responsiveWidth(12),
+    paddingLeft: responsiveWidth(8),
     paddingVertical: responsiveHeight(9),
     alignItems: "center",
     justifyContent: "center",
   },
-  iconPlaceholder: {
-    width: responsiveWidth(36),
-    height: responsiveHeight(36),
-    borderRadius: responsiveWidth(18),
-    backgroundColor: "#4A4A4A",
-  },
   icon: {
-    width: responsiveWidth(36),
-    height: responsiveHeight(36),
-    borderRadius: responsiveWidth(18),
+    width: responsiveWidth(40),
+    height: responsiveHeight(40),
+    borderRadius: responsiveWidth(20),
   },
   textContainer: {
     flex: 1,
-    marginRight: responsiveWidth(10),
   },
-  name: {
-    fontSize: responsiveFontSize(16),
-    fontWeight: "bold",
-    color: "white",
-  },
-  subRow: {
+  nameRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: responsiveHeight(2),
+    marginBottom: responsiveHeight(6),
+  },
+  symbol: {
+    fontSize: responsiveFontSize(14),
+    fontFamily: Fonts.satoshiMedium,
+    color: Colors.textPrimary,
+    marginRight: responsiveWidth(4),
+  },
+  assetTag: {
+    backgroundColor: Colors.graySurface,
+    borderRadius: responsiveWidth(12),
+    paddingHorizontal: responsiveWidth(4),
+    paddingVertical: responsiveHeight(2),
+  },
+  assetTagText: {
+    fontSize: responsiveFontSize(12),
+    color: Colors.grayTextLight,
+    fontFamily: Fonts.satoshiRegular,
+  },
+  metaRow: {
+    flexDirection: "row",
+    alignItems: "center",
   },
   priceText: {
     fontSize: responsiveFontSize(12),
-    color: "gray",
-    marginRight: responsiveWidth(8),
+    color: Colors.text,
+    fontFamily: Fonts.satoshiMedium,
+    marginRight: responsiveWidth(6),
   },
   changePill: {
-    backgroundColor: "#1E4620",
-    paddingHorizontal: responsiveWidth(5),
+    backgroundColor: Colors.greenSurfaceDark,
+    paddingHorizontal: responsiveWidth(6),
     paddingVertical: responsiveHeight(2),
-    borderRadius: responsiveWidth(4),
+    borderRadius: responsiveWidth(12),
   },
   changeText: {
-    fontSize: responsiveFontSize(10),
-    color: "#4CAF50",
-    fontWeight: "bold",
+    fontSize: responsiveFontSize(12),
+    color: Colors.greenBright,
+    fontFamily: Fonts.satoshiMedium,
   },
   balanceContainer: {
     alignItems: "flex-end",
   },
   balanceMain: {
-    fontSize: responsiveFontSize(16),
-    fontWeight: "bold",
-    color: "white",
+    fontSize: responsiveFontSize(14),
+    fontFamily: Fonts.satoshiMedium,
+    color: Colors.textPrimary,
   },
   balanceSub: {
     fontSize: responsiveFontSize(12),
-    color: "gray",
-    marginTop: responsiveHeight(2),
+    color: Colors.text,
+    marginTop: responsiveHeight(4),
+    fontFamily: Fonts.satoshiRegular,
   },
 });
 

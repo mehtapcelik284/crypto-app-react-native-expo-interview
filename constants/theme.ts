@@ -7,6 +7,11 @@ export const Colors = {
   icon: "#9BA1A6",
   tabIconDefault: "#9BA1A6",
   tabIconSelected: "#789BE3",
+  textPrimary: "#FFFFFF",
+  graySurface: "#49505B40",
+  grayTextLight: "#D9DBDF",
+  greenSurfaceDark: "#0F554480",
+  greenBright: "#7BD9B7",
 };
 
 export const FontStyles = {
