@@ -1,3 +1,4 @@
+import ArrowLeft from "@/components/common/ArrowLeft";
 import { Colors, Fonts } from "@/constants/theme";
 import { formatFiatValue } from "@/utils/formatters";
 import { paramToNumber, paramToString } from "@/utils/params";
@@ -6,7 +7,6 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from "@/utils/responsive";
-import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
@@ -39,14 +39,17 @@ const BrowseDetailScreen = () => {
   const tokenChangePct = paramToNumber(params.priceChangePct);
   const tokenChangeValue = paramToNumber(params.priceChangeValue);
   const isChangePositive = tokenChangePct >= 0;
-  const priceDisplay = formatFiatValue(tokenPrice, { compact: true });
+  const priceDisplay = formatFiatValue(tokenPrice, {
+    compact: true,
+    noSpace: true,
+  });
   const changePercentDisplay = `${isChangePositive ? "+" : "-"}${Math.abs(
     tokenChangePct
   ).toFixed(2)}%`;
   const changeValueDisplay = formatFiatValue(Math.abs(tokenChangeValue), {
     compact: true,
+    noSpace: true,
   });
-  const changeDisplay = `${changePercentDisplay} ${changeValueDisplay}`;
   const networkLabel = tokenName
     ? t("browse.network_label", { name: tokenName })
     : undefined;
@@ -83,8 +86,7 @@ const BrowseDetailScreen = () => {
             style={styles.backButton}
             hitSlop={responsiveWidth(12)}
           >
-            <Ionicons
-              name="chevron-back"
+            <ArrowLeft
               size={responsiveFontSize(22)}
               color={Colors.textPrimary}
             />
@@ -113,16 +115,29 @@ const BrowseDetailScreen = () => {
               isChangePositive ? styles.changePositive : styles.changeNegative,
             ]}
           >
-            <Text
-              style={[
-                styles.changeText,
-                isChangePositive
-                  ? styles.changePositiveText
-                  : styles.changeNegativeText,
-              ]}
-            >
-              {changeDisplay}
-            </Text>
+            <View style={styles.changeTextRow}>
+              <Text
+                style={[
+                  styles.changeText,
+                  isChangePositive
+                    ? styles.changePositiveText
+                    : styles.changeNegativeText,
+                ]}
+              >
+                {changePercentDisplay}
+              </Text>
+              <Text
+                style={[
+                  styles.changeText,
+                  styles.changeValueText,
+                  isChangePositive
+                    ? styles.changePositiveText
+                    : styles.changeNegativeText,
+                ]}
+              >
+                {changeValueDisplay}
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -204,7 +219,7 @@ const styles = StyleSheet.create({
   tokenNameText: {
     fontFamily: Fonts.satoshiRegular,
     fontSize: responsiveFontSize(14),
-    color: Colors.text
+    color: Colors.text,
   },
   section: {
     alignItems: "center",
@@ -223,12 +238,19 @@ const styles = StyleSheet.create({
   },
   changePill: {
     borderRadius: responsiveWidth(14),
-    paddingHorizontal: responsiveWidth(12),
-    paddingVertical: responsiveHeight(6),
+    paddingHorizontal: responsiveWidth(6),
+    paddingVertical: responsiveHeight(2),
+  },
+  changeTextRow: {
+    flexDirection: "row",
+    alignItems: "center",
   },
   changeText: {
     fontFamily: Fonts.satoshiMedium,
     fontSize: responsiveFontSize(12),
+  },
+  changeValueText: {
+    marginLeft: responsiveWidth(4),
   },
   changePositiveText: {
     color: Colors.greenBright,

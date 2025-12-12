@@ -1,6 +1,6 @@
 import { Colors, Fonts } from "@/constants/theme";
 import { MarketToken } from "@/services/api/markets";
-import { formatFiatValue } from "@/utils/formatters";
+import { formatFiatValue, formatPercentage } from "@/utils/formatters";
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -17,9 +17,7 @@ type Props = {
 
 const BrowseTokenItem = ({ token, onPress }: Props) => {
   const changePositive = (token.price_change_percentage_24h ?? 0) >= 0;
-  const changeDisplay = `${changePositive ? "+" : ""}${(
-    token.price_change_percentage_24h ?? 0
-  ).toFixed(2)}%`;
+  const changeDisplay = formatPercentage(token.price_change_percentage_24h ?? 0);
 
   return (
     <TouchableOpacity
