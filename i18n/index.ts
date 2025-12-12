@@ -1,5 +1,5 @@
-import en from "@i18n/locales/en.json";
-import tr from "@i18n/locales/tr.json";
+import en from "@/i18n/locales/en.json";
+import tr from "@/i18n/locales/tr.json";
 import i18n, { Resource } from "i18next";
 import { initReactI18next } from "react-i18next";
 
