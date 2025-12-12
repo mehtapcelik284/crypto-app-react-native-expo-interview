@@ -1,27 +1,56 @@
-import { useRouter } from "expo-router";
-import React from "react";
+import ToggleIconSVG from "@/components/home/ToggleIcon";
+import { SELECTED_NETWORKS } from "@/constants/networks";
+import { Colors, Fonts } from "@/constants/theme";
+import { useNavigation } from "expo-router";
+import React, { useLayoutEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import AssetItem from "../../../components/home/AssetItem";
 
 const HomeScreen = () => {
-  const router = useRouter();
+  const navigation = useNavigation();
   const { t } = useTranslation();
 
-  const handleNavigateToNetworks = () => {
-    router.push("/select-networks");
-  };
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: true,
+      headerTitle: () => null,
+      headerRight: () => <ToggleIconSVG size={20} color={Colors.tint} />,
+      headerLeft: () => (
+        <Text style={headerStyles.headerLeftTitle}>{t("home.assets")}</Text>
+      ),
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "black",
+        elevation: 0,
+        shadowOpacity: 0,
+      },
+    });
+  }, [navigation, t]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{t("home")}</Text>
-      <Button title={t("select_networks.title")} onPress={handleNavigateToNetworks} />
+      <FlatList
+        data={SELECTED_NETWORKS}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <AssetItem network={item} />}
+        style={styles.list}
+      />
     </View>
   );
 };
 
+const headerStyles = StyleSheet.create({
+  headerLeftTitle: {
+    fontSize: Fonts.size.small,
+    color: Colors.text,
+    fontFamily: Fonts.satoshiMedium,
+  },
+});
+
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center" },
-  title: { fontSize: 24, marginBottom: 20 },
+  container: { flex: 1, backgroundColor: "black" },
+  list: { paddingHorizontal: 0 },
 });
 
 export default HomeScreen;

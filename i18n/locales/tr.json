@@ -8,6 +8,7 @@
     "title": "Ana Sayfa"
   },
   "browse": {
+    "title": "Göz At",
     "detail": "Detay {{id}}"
   },
   "select_networks": {

@@ -1,23 +1,22 @@
 import { IconSymbol } from "@/components/ui/icon-symbol";
-import { useColorScheme } from "@/hooks/use-color-scheme";
-import {
-    DarkTheme,
-    DefaultTheme,
-    ThemeProvider,
-} from "@react-navigation/native";
+import { CustomTheme } from "@/constants/theme";
+import { ThemeProvider } from "@react-navigation/native";
 import { Tabs } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useTranslation } from "react-i18next";
+import { StyleSheet } from "react-native";
 import "react-native-reanimated";
 
-const TabsLayout = () => {
-  const colorScheme = useColorScheme();
+export default function TabsLayout() {
   const { t } = useTranslation();
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={CustomTheme}>
       <StatusBar style="auto" />
-      <Tabs>
+      <Tabs
+        initialRouteName="(home)/index"
+        {...({ sceneContainerStyle: styles.sceneContainer } as any)}
+      >
         <Tabs.Screen
           name="(home)/index"
           options={{
@@ -34,7 +33,7 @@ const TabsLayout = () => {
             headerShown: false,
             title: t("tabs.browse"),
             tabBarIcon: ({ color }) => (
-              <IconSymbol size={28} name="house.fill" color={color} />
+              <IconSymbol size={28} name="globe" color={color} />
             ),
           }}
         />
@@ -49,5 +48,10 @@ const TabsLayout = () => {
       </Tabs>
     </ThemeProvider>
   );
-};
-export default TabsLayout;
+}
+
+const styles = StyleSheet.create({
+  sceneContainer: {
+    padding: 16,
+  },
+});

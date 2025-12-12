@@ -5,9 +5,11 @@
     "browse": "Browse"
   },
   "home": {
-    "title": "Home"
+    "title": "Home",
+    "assets": "ASSETS"
   },
   "browse": {
+    "title": "Browse",
     "detail": "Detail {{id}}"
   },
   "select_networks": {

@@ -1,53 +1,78 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
-
-import { Platform } from 'react-native';
-
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+import { Theme } from "@react-navigation/native";
 
 export const Colors = {
-  light: {
-    text: '#11181C',
-    background: '#fff',
-    tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
+  text: "#8D96A3",
+  background: "#151718",
+  tint: "#789BE3",
+  icon: "#9BA1A6",
+  tabIconDefault: "#9BA1A6",
+  tabIconSelected: "#789BE3",
+};
+
+export const FontStyles = {
+  size: {
+    xsmall: 10,
+    small: 12,
+    medium: 14,
+    large: 16,
+    xlarge: 20,
+    xxlarge: 24,
   },
-  dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
+
+  weight: {
+    light: "300",
+    regular: "400",
+    medium: "500",
+    semibold: "600",
+    bold: "700",
+    extrabold: "800",
   },
 };
 
-export const Fonts = Platform.select({
-  ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
-    sans: 'system-ui',
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
-    serif: 'ui-serif',
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
-    rounded: 'ui-rounded',
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
-    mono: 'ui-monospace',
+export type CustomFonts = typeof FontStyles & {
+  satoshiRegular: string;
+  satoshiMedium: string;
+};
+
+export const Fonts: CustomFonts = {
+  satoshiRegular: "Satoshi-Regular",
+  satoshiMedium: "Satoshi-Medium",
+  ...FontStyles,
+};
+
+export interface AppTheme extends Theme {
+  customFonts: CustomFonts;
+}
+
+const navigationFonts: Theme["fonts"] = {
+  regular: {
+    fontFamily: Fonts.satoshiRegular,
+    fontWeight: "400",
   },
-  default: {
-    sans: 'normal',
-    serif: 'serif',
-    rounded: 'normal',
-    mono: 'monospace',
+  medium: {
+    fontFamily: Fonts.satoshiMedium,
+    fontWeight: "500",
   },
-  web: {
-    sans: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-    serif: "Georgia, 'Times New Roman', serif",
-    rounded: "'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif",
-    mono: "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+  bold: {
+    fontFamily: Fonts.satoshiMedium,
+    fontWeight: "700",
   },
-});
+  heavy: {
+    fontFamily: Fonts.satoshiMedium,
+    fontWeight: "800",
+  },
+};
+
+export const CustomTheme: AppTheme = {
+  dark: true,
+  colors: {
+    primary: Colors.tint,
+    background: Colors.background,
+    card: Colors.background,
+    text: Colors.text,
+    border: "#333333",
+    notification: "rgb(255, 59, 48)",
+  },
+  fonts: navigationFonts,
+  customFonts: Fonts,
+};
