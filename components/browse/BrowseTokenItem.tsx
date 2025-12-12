@@ -24,6 +24,7 @@ const BrowseTokenItem = ({ token, onPress, isFirst }: Props) => {
 
   return (
     <TouchableOpacity
+      testID={`browse-token-${token.id}`}
       style={[styles.item, isFirst && styles.firstItem]}
       activeOpacity={0.8}
       onPress={() => onPress?.(token)}

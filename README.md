@@ -18,6 +18,11 @@ All commands will open the Expo CLI where you can launch Android, iOS, or web ta
 
 If you prefer the default Expo flow, you can still run `npm start` (or `npx expo start`).
 
+## Linting & Tests
+
+- Lint the project: `npm run lint`
+- Run the Jest test suite: `npm test`
+
 ## Resetting the template
 
 ```bash

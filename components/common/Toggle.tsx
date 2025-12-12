@@ -10,9 +10,10 @@ type ToggleProps = {
   isOn: boolean;
   onToggle?: () => void;
   style?: ViewStyle;
+  testID?: string;
 };
 
-const Toggle = ({ isOn, onToggle, style }: ToggleProps) => {
+const Toggle = ({ isOn, onToggle, style, testID }: ToggleProps) => {
   const translateX = responsiveWidth(20);
 
   return (
@@ -27,6 +28,7 @@ const Toggle = ({ isOn, onToggle, style }: ToggleProps) => {
         },
         style,
       ]}
+      testID={testID}
       hitSlop={12}
     >
       <View

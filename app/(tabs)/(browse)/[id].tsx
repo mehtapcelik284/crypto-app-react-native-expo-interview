@@ -84,6 +84,7 @@ const BrowseDetailScreen = () => {
           <TouchableOpacity
             onPress={handleBackPress}
             style={styles.backButton}
+            testID="browse-detail-back-button"
             hitSlop={responsiveWidth(12)}
           >
             <ArrowLeft
