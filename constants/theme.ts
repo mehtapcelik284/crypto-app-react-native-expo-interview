@@ -12,6 +12,12 @@ export const Colors = {
   grayTextLight: "#D9DBDF",
   greenSurfaceDark: "#0F554480",
   greenBright: "#7BD9B7",
+  toggle: {
+    trackOn: "#789BE3",
+    thumbOn: "#EDEEF1",
+    trackOff: "#8D96A3",
+    thumbOff: "#49505B",
+  },
 };
 
 export const FontStyles = {
