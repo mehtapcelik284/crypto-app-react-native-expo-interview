@@ -12,13 +12,15 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type Props = {
   token: MarketToken;
-  onPress?: (token: MarketToken) => void;
+  onPress?: (_: MarketToken) => void;
   isFirst?: boolean;
 };
 
 const BrowseTokenItem = ({ token, onPress, isFirst }: Props) => {
   const changePositive = (token.price_change_percentage_24h ?? 0) >= 0;
-  const changeDisplay = formatPercentage(token.price_change_percentage_24h ?? 0);
+  const changeDisplay = formatPercentage(
+    token.price_change_percentage_24h ?? 0
+  );
 
   return (
     <TouchableOpacity
@@ -40,7 +42,9 @@ const BrowseTokenItem = ({ token, onPress, isFirst }: Props) => {
       </View>
 
       <View style={styles.rightSection}>
-        <Text style={styles.priceText}>{formatFiatValue(token.current_price)}</Text>
+        <Text style={styles.priceText}>
+          {formatFiatValue(token.current_price)}
+        </Text>
         <View
           style={[
             styles.changePill,
@@ -50,7 +54,9 @@ const BrowseTokenItem = ({ token, onPress, isFirst }: Props) => {
           <Text
             style={[
               styles.changeText,
-              changePositive ? styles.changePositiveText : styles.changeNegativeText,
+              changePositive
+                ? styles.changePositiveText
+                : styles.changeNegativeText,
             ]}
           >
             {changeDisplay}
@@ -67,7 +73,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingBottom: responsiveHeight(24),
-    paddingHorizontal: responsiveWidth(8)
+    paddingHorizontal: responsiveWidth(8),
   },
   firstItem: {
     paddingTop: responsiveHeight(12),
@@ -132,17 +138,17 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.greenSurfaceDark,
   },
   changeNegative: {
-    backgroundColor: Colors.redDark
+    backgroundColor: Colors.redDark,
   },
   changeText: {
     fontFamily: Fonts.satoshiMedium,
     fontSize: responsiveFontSize(12),
   },
   changePositiveText: {
-    color: Colors.greenBright
+    color: Colors.greenBright,
   },
   changeNegativeText: {
-    color: Colors.redLight
+    color: Colors.redLight,
   },
 });
 
