@@ -1,21 +1,29 @@
 import ToggleIconSVG from "@/components/home/ToggleIcon";
 import { SELECTED_NETWORKS } from "@/constants/networks";
 import { Colors, Fonts } from "@/constants/theme";
-import { useNavigation } from "expo-router";
+import { useNavigation, useRouter } from "expo-router";
 import React, { useLayoutEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import AssetItem from "../../../components/home/AssetItem";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const router = useRouter();
   const { t } = useTranslation();
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: true,
       headerTitle: () => null,
-      headerRight: () => <ToggleIconSVG size={20} color={Colors.tint} />,
+      headerRight: () => (
+        <TouchableOpacity
+          onPress={() => router.push("/select-networks")}
+          hitSlop={8}
+        >
+          <ToggleIconSVG size={20} color={Colors.tint} />
+        </TouchableOpacity>
+      ),
       headerLeft: () => (
         <Text style={headerStyles.headerLeftTitle}>{t("home.assets")}</Text>
       ),
@@ -26,7 +34,7 @@ const HomeScreen = () => {
         shadowOpacity: 0,
       },
     });
-  }, [navigation, t]);
+  }, [navigation, router, t]);
 
   return (
     <View style={styles.container}>

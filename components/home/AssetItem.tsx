@@ -1,5 +1,14 @@
 import { Network } from "@/constants/networks";
-import { randomBalance, randomPercentage, randomPriceTRY } from "@/utils/randomValues";
+import {
+  randomBalance,
+  randomPercentage,
+  randomPriceTRY,
+} from "@/utils/randomValues";
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from "@/utils/responsive";
 import { Image } from "expo-image";
 import { StyleSheet, Text, View } from "react-native";
 
@@ -12,11 +21,13 @@ const AssetItem = ({ network }: { network: Network }) => {
 
   return (
     <View style={networkStyles.item}>
-      {iconSource ? (
-        <Image source={iconSource} style={networkStyles.icon} />
-      ) : (
-        <View style={networkStyles.iconPlaceholder} />
-      )}
+      <View style={networkStyles.iconWrapper}>
+        {iconSource ? (
+          <Image source={iconSource} style={networkStyles.icon} />
+        ) : (
+          <View style={networkStyles.iconPlaceholder} />
+        )}
+      </View>
 
       <View style={networkStyles.textContainer}>
         <Text style={networkStyles.name}>{network.name}</Text>
@@ -45,49 +56,54 @@ const networkStyles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: 15,
-    paddingHorizontal: 15,
+    paddingVertical: responsiveHeight(15),
+    paddingHorizontal: responsiveWidth(15),
+  },
+  iconWrapper: {
+    marginRight: responsiveWidth(15),
+    paddingHorizontal: responsiveWidth(8),
+    paddingVertical: responsiveHeight(9),
+    alignItems: "center",
+    justifyContent: "center",
   },
   iconPlaceholder: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+    width: responsiveWidth(36),
+    height: responsiveHeight(36),
+    borderRadius: responsiveWidth(18),
     backgroundColor: "#4A4A4A",
-    marginRight: 15,
   },
   icon: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    marginRight: 15,
+    width: responsiveWidth(36),
+    height: responsiveHeight(36),
+    borderRadius: responsiveWidth(18),
   },
   textContainer: {
     flex: 1,
-    marginRight: 10,
+    marginRight: responsiveWidth(10),
   },
   name: {
-    fontSize: 16,
+    fontSize: responsiveFontSize(16),
     fontWeight: "bold",
     color: "white",
   },
   subRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 2,
+    marginTop: responsiveHeight(2),
   },
   priceText: {
-    fontSize: 12,
+    fontSize: responsiveFontSize(12),
     color: "gray",
-    marginRight: 8,
+    marginRight: responsiveWidth(8),
   },
   changePill: {
     backgroundColor: "#1E4620",
-    paddingHorizontal: 5,
-    paddingVertical: 2,
-    borderRadius: 4,
+    paddingHorizontal: responsiveWidth(5),
+    paddingVertical: responsiveHeight(2),
+    borderRadius: responsiveWidth(4),
   },
   changeText: {
-    fontSize: 10,
+    fontSize: responsiveFontSize(10),
     color: "#4CAF50",
     fontWeight: "bold",
   },
@@ -95,14 +111,14 @@ const networkStyles = StyleSheet.create({
     alignItems: "flex-end",
   },
   balanceMain: {
-    fontSize: 16,
+    fontSize: responsiveFontSize(16),
     fontWeight: "bold",
     color: "white",
   },
   balanceSub: {
-    fontSize: 12,
+    fontSize: responsiveFontSize(12),
     color: "gray",
-    marginTop: 2,
+    marginTop: responsiveHeight(2),
   },
 });
 
