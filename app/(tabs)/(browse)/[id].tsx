@@ -229,6 +229,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.satoshiRegular,
     fontSize: responsiveFontSize(14),
     color: Colors.text,
+    paddingBottom: responsiveHeight(4),
   },
   priceValue: {
     fontFamily: Fonts.satoshiMedium,
