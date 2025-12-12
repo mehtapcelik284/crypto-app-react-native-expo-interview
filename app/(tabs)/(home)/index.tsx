@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: responsiveHeight(20),
+    paddingRight: responsiveWidth(8),
   },
   headerTitle: {
     fontFamily: Fonts.satoshiMedium,
@@ -77,11 +78,11 @@ const styles = StyleSheet.create({
     color: Colors.text,
   },
   listContent: {
-    paddingTop: responsiveHeight(24),
+    paddingTop: responsiveHeight(12),
     paddingBottom: responsiveHeight(24),
   },
   separator: {
-    height: responsiveHeight(16),
+    height: responsiveHeight(8),
   },
 });
 

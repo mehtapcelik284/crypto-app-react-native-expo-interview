@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: responsiveHeight(12),
   },
   leftSection: {
     flexDirection: "row",
@@ -132,6 +131,7 @@ const styles = StyleSheet.create({
   },
   balanceContainer: {
     alignItems: "flex-end",
+    paddingRight: responsiveWidth(8),
   },
   balanceMain: {
     fontSize: responsiveFontSize(14),
