@@ -1,6 +1,7 @@
 import { jest } from "@jest/globals";
-import { MarketToken } from "@/services/api/markets";
-import { formatFiatValue, formatPercentage } from "@/utils/formatters";
+import type { MarketToken } from "@/services/api/markets";
+import * as formatters from "@/utils/formatters";
+import { beforeEach, describe, expect, it } from "@jest/globals";
 import { fireEvent, render } from "@testing-library/react-native";
 import React from "react";
 import BrowseTokenItem from "../BrowseTokenItem";
@@ -21,8 +22,8 @@ const token: MarketToken = {
   market_cap: 10,
 };
 
-const formatFiatValueMock = formatFiatValue as jest.Mock;
-const formatPercentageMock = formatPercentage as jest.Mock;
+const formatFiatValueMock = formatters.formatFiatValue as jest.Mock;
+const formatPercentageMock = formatters.formatPercentage as jest.Mock;
 
 describe("BrowseTokenItem", () => {
   beforeEach(() => {
