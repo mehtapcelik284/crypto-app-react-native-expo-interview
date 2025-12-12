@@ -11,7 +11,7 @@ export default function TabsLayout() {
 
   return (
     <ThemeProvider value={CustomTheme}>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
       <Tabs initialRouteName="(home)/index">
         <Tabs.Screen
           name="(home)/index"
