@@ -1,6 +1,6 @@
 import { Colors, Fonts } from "@/constants/theme";
 import { MarketToken } from "@/services/api/markets";
-import { formatUsdValue } from "@/utils/formatters";
+import { formatFiatValue } from "@/utils/formatters";
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -8,20 +8,25 @@ import {
 } from "@/utils/responsive";
 import { Image } from "expo-image";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type Props = {
   token: MarketToken;
+  onPress?: (token: MarketToken) => void;
 };
 
-const BrowseTokenItem = ({ token }: Props) => {
+const BrowseTokenItem = ({ token, onPress }: Props) => {
   const changePositive = (token.price_change_percentage_24h ?? 0) >= 0;
   const changeDisplay = `${changePositive ? "+" : ""}${(
     token.price_change_percentage_24h ?? 0
   ).toFixed(2)}%`;
 
   return (
-    <View style={styles.item}>
+    <TouchableOpacity
+      style={styles.item}
+      activeOpacity={0.8}
+      onPress={() => onPress?.(token)}
+    >
       <View style={styles.leftSection}>
         <Image source={{ uri: token.image }} style={styles.icon} />
         <View style={styles.textContainer}>
@@ -36,7 +41,7 @@ const BrowseTokenItem = ({ token }: Props) => {
       </View>
 
       <View style={styles.rightSection}>
-        <Text style={styles.priceText}>{formatUsdValue(token.current_price)}</Text>
+        <Text style={styles.priceText}>{formatFiatValue(token.current_price)}</Text>
         <View
           style={[
             styles.changePill,
@@ -53,7 +58,7 @@ const BrowseTokenItem = ({ token }: Props) => {
           </Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

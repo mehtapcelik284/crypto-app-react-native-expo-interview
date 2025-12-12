@@ -65,7 +65,7 @@ export const SELECTED_ASSETS: Asset[] = [
     priceTRY: 163281.09,
     changePercentage: 4.82,
     balance: 2.11,
-    balanceSymbol: "POLYGON",
+    balanceSymbol: "POL",
     balanceFiat: 4834.02,
     name: AssetName.POLYGON,
     shortName: AssetShortName.POLYGON,

@@ -11,7 +11,10 @@
   },
   "browse": {
     "title": "Göz At",
-    "detail": "Detay {{id}}"
+    "detail": "Detay {{id}}",
+    "price_label": "Fiyat",
+    "market_cap_label": "Piyasa Değeri",
+    "network_label": "{{name}} Ağı"
   },
   "select_networks": {
     "title": "Varlıkları Yönet"

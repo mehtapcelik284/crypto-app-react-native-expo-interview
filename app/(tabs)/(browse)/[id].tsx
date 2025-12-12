@@ -1,31 +1,218 @@
-import { useLocalSearchParams, useNavigation } from "expo-router";
-import React, { useLayoutEffect } from "react";
+import { Colors, Fonts } from "@/constants/theme";
+import { formatFiatValue } from "@/utils/formatters";
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from "@/utils/responsive";
+import { paramToNumber, paramToString } from "@/utils/params";
+import { Ionicons } from "@expo/vector-icons";
+import { Image } from "expo-image";
+import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
+import React, { useCallback, useLayoutEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+type RouteParams = {
+  id?: string | string[];
+  name?: string | string[];
+  symbol?: string | string[];
+  price?: string | string[];
+  marketCap?: string | string[];
+  image?: string | string[];
+  priceChangePct?: string | string[];
+  priceChangeValue?: string | string[];
+};
 
 const BrowseDetailScreen = () => {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const params = useLocalSearchParams<RouteParams>();
   const navigation = useNavigation();
+  const router = useRouter();
   const { t } = useTranslation();
 
-  useLayoutEffect(() => {
-    const dynamicTitle = t("browse.detail", { id: id });
+  const tokenSymbol = paramToString(params.symbol).toUpperCase();
+  const tokenName = paramToString(params.name);
+  const tokenImage = paramToString(params.image);
+  const tokenPrice = paramToNumber(params.price);
+  const tokenChangePct = paramToNumber(params.priceChangePct);
+  const tokenChangeValue = paramToNumber(params.priceChangeValue);
+  const isChangePositive = tokenChangePct >= 0;
+  const priceDisplay = formatFiatValue(tokenPrice);
+  const changePercentDisplay = `${isChangePositive ? "+" : "-"}${Math.abs(
+    tokenChangePct
+  ).toFixed(2)}%`;
+  const changeValueDisplay = formatFiatValue(Math.abs(tokenChangeValue));
+  const changeDisplay = `${changePercentDisplay} ${changeValueDisplay}`;
+  const networkLabel = tokenName
+    ? t("browse.network_label", { name: tokenName })
+    : undefined;
 
-    navigation.setOptions({ title: dynamicTitle });
-  }, [navigation, id, t]);
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: false,
+    });
+  }, [navigation]);
+
+  const handleBackPress = useCallback(() => {
+    router.replace("/(tabs)/(browse)");
+  }, [router]);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>BrowseDetailScreen</Text>
-      <Text style={styles.idText}>Selected Id: {id}</Text>
-    </View>
+    <SafeAreaView style={styles.safeArea} edges={["top"]}>
+      <View style={styles.container}>
+        <View style={styles.customHeader}>
+          <TouchableOpacity
+            onPress={handleBackPress}
+            style={styles.backButton}
+            hitSlop={responsiveWidth(12)}
+          >
+            <Ionicons
+              name="chevron-back"
+              size={responsiveFontSize(22)}
+              color={Colors.textPrimary}
+            />
+          </TouchableOpacity>
+          <View style={styles.headerTitle}>
+            {!!tokenImage && (
+              <Image source={{ uri: tokenImage }} style={styles.headerIcon} />
+            )}
+            <Text style={styles.headerTitleText}>
+              {tokenSymbol || t("browse.title")}
+            </Text>
+          </View>
+          <View style={styles.headerPlaceholder} />
+        </View>
+        <View style={styles.tokenHeader}>
+          {networkLabel && (
+            <Text style={styles.tokenNameText}>{networkLabel}</Text>
+          )}
+        </View>
+        <View style={styles.section}>
+          <Text style={styles.sectionLabel}>{t("browse.price_label")}</Text>
+          <Text style={styles.priceValue}>{priceDisplay}</Text>
+          <View
+            style={[
+              styles.changePill,
+              isChangePositive ? styles.changePositive : styles.changeNegative,
+            ]}
+          >
+            <Text
+              style={[
+                styles.changeText,
+                isChangePositive
+                  ? styles.changePositiveText
+                  : styles.changeNegativeText,
+              ]}
+            >
+              {changeDisplay}
+            </Text>
+          </View>
+        </View>
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center" },
-  title: { fontSize: 24, fontWeight: "bold", marginBottom: 10 },
-  idText: { fontSize: 18 },
+  safeArea: {
+    flex: 1,
+    backgroundColor: Colors.background,
+  },
+  container: {
+    flex: 1,
+    paddingHorizontal: responsiveWidth(24),
+    alignItems: "center",
+  },
+  customHeader: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  backButton: {
+    paddingVertical: responsiveHeight(4),
+    paddingRight: responsiveWidth(8),
+  },
+  headerTitle: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: responsiveWidth(8),
+  },
+  headerPlaceholder: {
+    width: responsiveWidth(30),
+  },
+  headerIcon: {
+    width: responsiveWidth(28),
+    height: responsiveWidth(28),
+    borderRadius: responsiveWidth(14),
+  },
+  headerTitleText: {
+    fontFamily: Fonts.satoshiMedium,
+    fontSize: responsiveFontSize(18),
+    color: Colors.textPrimary,
+  },
+  tokenHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingTop: responsiveHeight(8),
+  },
+  icon: {
+    width: responsiveWidth(64),
+    height: responsiveWidth(64),
+    borderRadius: responsiveWidth(32),
+  },
+  headerTexts: {
+    alignItems: "center",
+  },
+  tokenSymbolText: {
+    fontFamily: Fonts.satoshiMedium,
+    fontSize: responsiveFontSize(24),
+    color: Colors.textPrimary,
+  },
+  tokenNameText: {
+    fontFamily: Fonts.satoshiRegular,
+    fontSize: responsiveFontSize(14),
+    color: Colors.text,
+    marginTop: responsiveHeight(4),
+  },
+  section: {
+    alignItems: "center",
+    marginTop: responsiveHeight(24),
+  },
+  sectionLabel: {
+    fontFamily: Fonts.satoshiRegular,
+    fontSize: responsiveFontSize(14),
+    paddingTop: responsiveHeight(4),
+    color: Colors.text,
+  },
+  priceValue: {
+    fontFamily: Fonts.satoshiMedium,
+    fontSize: responsiveFontSize(32),
+    color: Colors.textPrimary,
+    paddingBottom: responsiveHeight(8),
+  },
+  changePill: {
+    borderRadius: responsiveWidth(14),
+    paddingHorizontal: responsiveWidth(12),
+    paddingVertical: responsiveHeight(6),
+  },
+  changeText: {
+    fontFamily: Fonts.satoshiMedium,
+    fontSize: responsiveFontSize(12),
+  },
+  changePositiveText: {
+    color: Colors.greenBright,
+  },
+  changeNegativeText: {
+    color: Colors.redLight,
+  },
+  changePositive: {
+    backgroundColor: Colors.greenSurfaceDark,
+  },
+  changeNegative: {
+    backgroundColor: Colors.redDark,
+  },
 });
 
 export default BrowseDetailScreen;

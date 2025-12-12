@@ -2,6 +2,8 @@ import axios from "axios";
 import { apiClient } from "./client";
 
 export type MarketToken = {
+  price_change_24h: number;
+  market_cap: number;
   id: string;
   symbol: string;
   name: string;
@@ -25,9 +27,9 @@ export const fetchMarketTokens = async (page = 1) => {
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      const apiMessage =
-        (error.response?.data as { status?: { error_message?: string } })?.status
-          ?.error_message;
+      const apiMessage = (
+        error.response?.data as { status?: { error_message?: string } }
+      )?.status?.error_message;
       if (apiMessage) {
         throw new Error(apiMessage);
       }

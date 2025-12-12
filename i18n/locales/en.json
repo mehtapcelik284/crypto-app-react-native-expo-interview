@@ -11,7 +11,10 @@
   },
   "browse": {
     "title": "Browse",
-    "detail": "Detail {{id}}"
+    "detail": "Detail {{id}}",
+    "price_label": "Price",
+    "market_cap_label": "Market Cap",
+    "network_label": "{{name}} Network"
   },
   "select_networks": {
     "title": "Manage Assets"
