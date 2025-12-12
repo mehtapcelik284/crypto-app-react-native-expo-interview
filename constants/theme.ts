@@ -12,6 +12,8 @@ export const Colors = {
   grayTextLight: "#D9DBDF",
   greenSurfaceDark: "#0F554480",
   greenBright: "#7BD9B7",
+  redLight: "#F96A6A",
+  redDark: "#4C1D1D",
   toggle: {
     trackOn: "#789BE3",
     thumbOn: "#EDEEF1",

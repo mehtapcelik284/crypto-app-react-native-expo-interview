@@ -1,5 +1,5 @@
+import ToggleIconSVG from "@/components/common/ToggleIcon";
 import AssetItem from "@/components/home/AssetItem";
-import ToggleIconSVG from "@/components/home/ToggleIcon";
 import { SELECTED_ASSETS } from "@/constants/assets";
 import { Colors, Fonts } from "@/constants/theme";
 import { selectedNetworks } from "@/stores/networks/networksSlice";
@@ -36,7 +36,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea} edges={["top", "bottom"]}>
+    <SafeAreaView style={styles.safeArea} edges={["top"]}>
       <FlatList
         style={styles.list}
         data={filteredAssets}

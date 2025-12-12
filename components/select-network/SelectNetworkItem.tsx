@@ -1,4 +1,4 @@
-import Toggle from "@/components/Toggle";
+import Toggle from "@/components/common/Toggle";
 import { Asset } from "@/constants/assets";
 import { Colors, Fonts } from "@/constants/theme";
 import {
