@@ -1,5 +1,5 @@
 {
-  "app_name": "Kriptok",
+  "app_name": "KriptoK",
   "tabs": {
     "home": "Home",
     "browse": "Browse"
@@ -13,6 +13,6 @@
     "detail": "Detail {{id}}"
   },
   "select_networks": {
-    "title": "Select Networks"
+    "title": "Manage Assets"
   }
 }

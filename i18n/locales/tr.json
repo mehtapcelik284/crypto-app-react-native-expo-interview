@@ -1,5 +1,5 @@
 {
-  "app_name": "Kriptok",
+  "app_name": "KriptoK",
   "tabs": {
     "home": "Ana Sayfa",
     "browse": "Göz At"
@@ -13,6 +13,6 @@
     "detail": "Detay {{id}}"
   },
   "select_networks": {
-    "title": "Ağ Seç"
+    "title": "Varlıkları Yönet"
   }
 }

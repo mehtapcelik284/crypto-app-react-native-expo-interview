@@ -20,7 +20,7 @@ export default function RootLayout() {
   useEffect(() => {
     if (fontError) throw fontError;
   }, [fontError]);
-  
+
   useEffect(() => {
     if (fontsLoaded) {
       SplashScreen.hideAsync();
@@ -28,9 +28,8 @@ export default function RootLayout() {
   }, [fontsLoaded]);
 
   if (!fontsLoaded) {
-    return null; 
+    return null;
   }
-
 
   return (
     <SafeAreaProvider>
@@ -50,7 +49,7 @@ export default function RootLayout() {
             />
             <Stack.Screen
               name="select-networks"
-              options={{ headerShown: true, title: "Select Network" }}
+              options={{ headerShown: true }}
             />
           </Stack>
         </I18nextProvider>

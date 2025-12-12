@@ -6,6 +6,12 @@ export enum AssetName {
   POLYGON = "Polygon",
 }
 
+export enum AssetShortName {
+  ETHER = "Ether",
+  SOLANA = "Solana",
+  POLYGON = "Polygon",
+}
+
 export type AssetId = "eth" | "sol" | "poly";
 
 export const AssetIcons: Record<AssetId, ImageSource> = {
@@ -18,6 +24,7 @@ export type Asset = {
   id: string;
   symbol: string;
   name: AssetName;
+  shortName: AssetShortName;
   icon: ImageSource;
   priceTRY: number;
   changePercentage: number;
@@ -37,6 +44,7 @@ export const SELECTED_ASSETS: Asset[] = [
     balanceSymbol: "ETH",
     balanceFiat: 172096.21,
     name: AssetName.ETHEREUM,
+    shortName: AssetShortName.ETHER,
   },
   {
     id: "asset-sol",
@@ -48,6 +56,7 @@ export const SELECTED_ASSETS: Asset[] = [
     balanceSymbol: "SOL",
     balanceFiat: 172096.21,
     name: AssetName.SOLANA,
+    shortName: AssetShortName.SOLANA,
   },
   {
     id: "asset-poly",
@@ -59,5 +68,6 @@ export const SELECTED_ASSETS: Asset[] = [
     balanceSymbol: "POLYGON",
     balanceFiat: 4834.02,
     name: AssetName.POLYGON,
+    shortName: AssetShortName.POLYGON,
   },
 ];

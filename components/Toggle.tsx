@@ -13,6 +13,8 @@ type ToggleProps = {
 };
 
 const Toggle = ({ isOn, onToggle, style }: ToggleProps) => {
+  const translateX = responsiveWidth(20);
+
   return (
     <Pressable
       onPress={onToggle}
@@ -22,7 +24,6 @@ const Toggle = ({ isOn, onToggle, style }: ToggleProps) => {
           backgroundColor: isOn
             ? Colors.toggle.trackOn
             : Colors.toggle.trackOff,
-          justifyContent: isOn ? "flex-end" : "flex-start",
         },
         style,
       ]}
@@ -35,6 +36,9 @@ const Toggle = ({ isOn, onToggle, style }: ToggleProps) => {
             backgroundColor: isOn
               ? Colors.toggle.thumbOn
               : Colors.toggle.thumbOff,
+            transform: [
+              { translateX: isOn ? translateX : 0 },
+            ],
           },
         ]}
       />
@@ -49,6 +53,9 @@ const styles = StyleSheet.create({
     borderRadius: responsiveHeight(14),
     paddingHorizontal: responsiveWidth(4),
     alignItems: "center",
+    justifyContent: "flex-start",
+    flexDirection: "row",
+    overflow: "hidden",
   },
   thumb: {
     width: responsiveWidth(20),

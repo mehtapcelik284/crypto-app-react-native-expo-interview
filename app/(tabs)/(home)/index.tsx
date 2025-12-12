@@ -42,6 +42,7 @@ const HomeScreen = () => {
             <TouchableOpacity
               onPress={handleTogglePress}
               hitSlop={responsiveWidth(10)}
+              style={styles.toggleButton}
             >
               <ToggleIconSVG size={responsiveWidth(18)} color={Colors.tint} />
             </TouchableOpacity>
@@ -59,17 +60,16 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: Colors.background,
+    paddingHorizontal: responsiveWidth(16),
   },
   list: {
     flex: 1,
-    paddingHorizontal: responsiveWidth(16),
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: responsiveHeight(20),
-    paddingRight: responsiveWidth(8),
   },
   headerTitle: {
     fontFamily: Fonts.satoshiMedium,
@@ -83,6 +83,9 @@ const styles = StyleSheet.create({
   },
   separator: {
     height: responsiveHeight(8),
+  },
+  toggleButton: {
+    paddingRight: responsiveWidth(8),
   },
 });
 

@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    paddingHorizontal: responsiveWidth(8)
   },
   leftSection: {
     flexDirection: "row",
@@ -73,7 +74,6 @@ const styles = StyleSheet.create({
   },
   iconWrapper: {
     marginRight: responsiveWidth(12),
-    paddingLeft: responsiveWidth(8),
     paddingVertical: responsiveHeight(9),
     alignItems: "center",
     justifyContent: "center",
@@ -131,7 +131,6 @@ const styles = StyleSheet.create({
   },
   balanceContainer: {
     alignItems: "flex-end",
-    paddingRight: responsiveWidth(8),
   },
   balanceMain: {
     fontSize: responsiveFontSize(14),

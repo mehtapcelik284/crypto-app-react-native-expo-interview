@@ -4,7 +4,6 @@ import { ThemeProvider } from "@react-navigation/native";
 import { Tabs } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useTranslation } from "react-i18next";
-import { StyleSheet } from "react-native";
 import "react-native-reanimated";
 
 export default function TabsLayout() {
@@ -13,10 +12,7 @@ export default function TabsLayout() {
   return (
     <ThemeProvider value={CustomTheme}>
       <StatusBar style="auto" />
-      <Tabs
-        initialRouteName="(home)/index"
-        {...({ sceneContainerStyle: styles.sceneContainer })}
-      >
+      <Tabs initialRouteName="(home)/index">
         <Tabs.Screen
           name="(home)/index"
           options={{
@@ -49,9 +45,3 @@ export default function TabsLayout() {
     </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  sceneContainer: {
-    padding: 16,
-  },
-});
