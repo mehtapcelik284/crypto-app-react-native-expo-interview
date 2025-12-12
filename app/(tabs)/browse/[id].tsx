@@ -61,7 +61,7 @@ const BrowseDetailScreen = () => {
   }, [navigation]);
 
   const handleBackPress = useCallback(() => {
-    router.replace("/(tabs)/(browse)");
+    router.replace("/(tabs)/browse");
   }, [router]);
 
   return (

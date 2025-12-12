@@ -66,7 +66,7 @@ describe("BrowseScreen", () => {
     fireEvent.press(getByTestId("browse-token-bitcoin"));
 
     expect(mockPush).toHaveBeenCalledWith({
-      pathname: "/(tabs)/(browse)/[id]",
+      pathname: "/(tabs)/browse/[id]",
       params: expect.objectContaining({
         id: token.id,
         name: token.name,

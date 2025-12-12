@@ -53,6 +53,6 @@ describe("BrowseDetailScreen", () => {
 
     fireEvent.press(getByTestId("browse-detail-back-button"));
 
-    expect(mockReplace).toHaveBeenCalledWith("/(tabs)/(browse)");
+    expect(mockReplace).toHaveBeenCalledWith("/(tabs)/browse");
   });
 });

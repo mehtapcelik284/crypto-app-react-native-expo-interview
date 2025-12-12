@@ -48,7 +48,7 @@ const BrowseScreen = () => {
 
   const handleTokenPress = (token: MarketToken) => {
     router.push({
-      pathname: "/(tabs)/(browse)/[id]",
+      pathname: "/(tabs)/browse/[id]",
       params: {
         id: token.id,
         name: token.name,

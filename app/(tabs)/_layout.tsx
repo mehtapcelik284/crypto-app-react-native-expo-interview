@@ -12,9 +12,9 @@ export default function TabsLayout() {
   return (
     <ThemeProvider value={CustomTheme}>
       <StatusBar style="light" />
-      <Tabs initialRouteName="(home)/index">
+      <Tabs>
         <Tabs.Screen
-          name="(home)/index"
+          name="home"
           options={{
             headerShown: false,
             title: t("tabs.home"),
@@ -24,7 +24,7 @@ export default function TabsLayout() {
           }}
         />
         <Tabs.Screen
-          name="(browse)/index"
+          name="browse"
           options={{
             headerShown: false,
             title: t("tabs.browse"),
@@ -34,12 +34,8 @@ export default function TabsLayout() {
           }}
         />
         <Tabs.Screen
-          name="(browse)/[id]"
-          options={{
-            headerShown: true,
-            title: t("browse.detail"),
-            href: null,
-          }}
+          name="index"
+          redirect
         />
       </Tabs>
     </ThemeProvider>
