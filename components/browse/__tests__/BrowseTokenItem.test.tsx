@@ -1,7 +1,6 @@
-import { jest } from "@jest/globals";
 import type { MarketToken } from "@/services/api/markets";
 import * as formatters from "@/utils/formatters";
-import { beforeEach, describe, expect, it } from "@jest/globals";
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import { fireEvent, render } from "@testing-library/react-native";
 import React from "react";
 import BrowseTokenItem from "../BrowseTokenItem";
