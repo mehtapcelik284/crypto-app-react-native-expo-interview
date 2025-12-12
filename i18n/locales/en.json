@@ -6,7 +6,8 @@
   },
   "home": {
     "title": "Home",
-    "assets": "Assets"
+    "assets": "Assets",
+    "empty": "No networks selected"
   },
   "browse": {
     "title": "Browse",

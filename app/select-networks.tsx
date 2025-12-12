@@ -1,27 +1,26 @@
 import SelectNetworkItem from "@/components/select-network/SelectNetworkItem";
-import { Asset, SELECTED_ASSETS } from "@/constants/assets";
+import { SELECTED_ASSETS } from "@/constants/assets";
 import { Colors, Fonts } from "@/constants/theme";
+import {
+  selectedNetworks,
+  toggleNetwork,
+} from "@/stores/networks/networksSlice";
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from "@/utils/responsive";
 import { useNavigation } from "expo-router";
-import React, { useLayoutEffect, useMemo, useState } from "react";
+import React, { useLayoutEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { FlatList, StyleSheet, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 
 const SelectNetworksScreen = () => {
   const navigation = useNavigation();
   const { t } = useTranslation();
-
-  const [selectedState, setSelectedState] = useState<Record<string, boolean>>(
-    () =>
-      SELECTED_ASSETS.reduce<Record<string, boolean>>((acc, asset) => {
-        acc[asset.id] = true;
-        return acc;
-      }, {})
-  );
+  const dispatch = useDispatch();
+  const networksSelection = useSelector(selectedNetworks);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -44,13 +43,6 @@ const SelectNetworksScreen = () => {
     });
   }, [navigation, t]);
 
-  const handleToggle = (asset: Asset) => {
-    setSelectedState((current) => ({
-      ...current,
-      [asset.id]: !current[asset.id],
-    }));
-  };
-
   const data = useMemo(() => SELECTED_ASSETS, []);
 
   return (
@@ -63,8 +55,8 @@ const SelectNetworksScreen = () => {
           renderItem={({ item }) => (
             <SelectNetworkItem
               asset={item}
-              isEnabled={!!selectedState[item.id]}
-              onToggle={() => handleToggle(item)}
+              isEnabled={!!networksSelection[item.id]}
+              onToggle={() => dispatch(toggleNetwork(item.id))}
             />
           )}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
@@ -77,10 +69,14 @@ const SelectNetworksScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: Colors.background,
+  },
   listContainer: {
     flex: 1,
-    paddingVertical: responsiveWidth(12),
     paddingHorizontal: responsiveWidth(16),
+    paddingVertical: responsiveHeight(12),
   },
   list: {
     flex: 1,

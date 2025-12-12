@@ -2,13 +2,14 @@ import AssetItem from "@/components/home/AssetItem";
 import ToggleIconSVG from "@/components/home/ToggleIcon";
 import { SELECTED_ASSETS } from "@/constants/assets";
 import { Colors, Fonts } from "@/constants/theme";
+import { selectedNetworks } from "@/stores/networks/networksSlice";
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from "@/utils/responsive";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import {
   FlatList,
@@ -18,10 +19,17 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useSelector } from "react-redux";
 
 const HomeScreen = () => {
   const router = useRouter();
   const { t } = useTranslation();
+  const networksSelection = useSelector(selectedNetworks);
+
+  const filteredAssets = useMemo(
+    () => SELECTED_ASSETS.filter((asset) => networksSelection[asset.id]),
+    [networksSelection]
+  );
 
   const handleTogglePress = () => {
     router.push("/select-networks");
@@ -31,7 +39,7 @@ const HomeScreen = () => {
     <SafeAreaView style={styles.safeArea} edges={["top", "bottom"]}>
       <FlatList
         style={styles.list}
-        data={SELECTED_ASSETS}
+        data={filteredAssets}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <AssetItem asset={item} />}
         ListHeaderComponent={
@@ -46,6 +54,11 @@ const HomeScreen = () => {
             >
               <ToggleIconSVG size={responsiveWidth(18)} color={Colors.tint} />
             </TouchableOpacity>
+          </View>
+        }
+        ListEmptyComponent={
+          <View style={styles.emptyState}>
+            <Text style={styles.emptyStateText}>{t("home.empty")}</Text>
           </View>
         }
         ItemSeparatorComponent={() => <View style={styles.separator} />}
@@ -86,6 +99,17 @@ const styles = StyleSheet.create({
   },
   toggleButton: {
     paddingRight: responsiveWidth(8),
+  },
+  emptyState: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: responsiveHeight(40),
+  },
+  emptyStateText: {
+    fontFamily: Fonts.satoshiRegular,
+    fontSize: responsiveFontSize(14),
+    color: Colors.text,
   },
 });
 

@@ -6,7 +6,8 @@
   },
   "home": {
     "title": "Ana Sayfa",
-    "assets": "Varlıklar"
+    "assets": "Varlıklar",
+    "empty": "Seçili ağ bulunmuyor"
   },
   "browse": {
     "title": "Göz At",
