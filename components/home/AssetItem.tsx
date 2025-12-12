@@ -1,9 +1,6 @@
 import { Network } from "@/constants/networks";
-import {
-  randomBalance,
-  randomPercentage,
-  randomPriceTRY,
-} from "@/utils/randomValues";
+import { randomBalance, randomPercentage, randomPriceTRY } from "@/utils/randomValues";
+import { Image } from "expo-image";
 import { StyleSheet, Text, View } from "react-native";
 
 const AssetItem = ({ network }: { network: Network }) => {
@@ -11,10 +8,15 @@ const AssetItem = ({ network }: { network: Network }) => {
   const change = randomPercentage();
   const balance = randomBalance();
   const balanceTRY = randomPriceTRY();
+  const iconSource = network.icon;
 
   return (
     <View style={networkStyles.item}>
-      <View style={networkStyles.iconPlaceholder} />
+      {iconSource ? (
+        <Image source={iconSource} style={networkStyles.icon} />
+      ) : (
+        <View style={networkStyles.iconPlaceholder} />
+      )}
 
       <View style={networkStyles.textContainer}>
         <Text style={networkStyles.name}>{network.name}</Text>
@@ -51,6 +53,12 @@ const networkStyles = StyleSheet.create({
     height: 36,
     borderRadius: 18,
     backgroundColor: "#4A4A4A",
+    marginRight: 15,
+  },
+  icon: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
     marginRight: 15,
   },
   textContainer: {

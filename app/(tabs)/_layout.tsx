@@ -15,7 +15,7 @@ export default function TabsLayout() {
       <StatusBar style="auto" />
       <Tabs
         initialRouteName="(home)/index"
-        {...({ sceneContainerStyle: styles.sceneContainer } as any)}
+        {...({ sceneContainerStyle: styles.sceneContainer })}
       >
         <Tabs.Screen
           name="(home)/index"
