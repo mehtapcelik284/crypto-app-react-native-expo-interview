@@ -2,7 +2,7 @@ import { Theme } from "@react-navigation/native";
 
 export const Colors = {
   text: "#8D96A3",
-  background: "#151718",
+  background: "#050505",
   tint: "#789BE3",
   icon: "#9BA1A6",
   tabIconDefault: "#9BA1A6",

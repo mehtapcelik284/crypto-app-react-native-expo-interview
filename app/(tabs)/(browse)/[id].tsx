@@ -1,13 +1,14 @@
 import { Colors, Fonts } from "@/constants/theme";
 import { formatFiatValue } from "@/utils/formatters";
+import { paramToNumber, paramToString } from "@/utils/params";
 import {
   responsiveFontSize,
   responsiveHeight,
   responsiveWidth,
 } from "@/utils/responsive";
-import { paramToNumber, paramToString } from "@/utils/params";
 import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
+import { LinearGradient } from "expo-linear-gradient";
 import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
 import React, { useCallback, useLayoutEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -38,11 +39,13 @@ const BrowseDetailScreen = () => {
   const tokenChangePct = paramToNumber(params.priceChangePct);
   const tokenChangeValue = paramToNumber(params.priceChangeValue);
   const isChangePositive = tokenChangePct >= 0;
-  const priceDisplay = formatFiatValue(tokenPrice);
+  const priceDisplay = formatFiatValue(tokenPrice, { compact: true });
   const changePercentDisplay = `${isChangePositive ? "+" : "-"}${Math.abs(
     tokenChangePct
   ).toFixed(2)}%`;
-  const changeValueDisplay = formatFiatValue(Math.abs(tokenChangeValue));
+  const changeValueDisplay = formatFiatValue(Math.abs(tokenChangeValue), {
+    compact: true,
+  });
   const changeDisplay = `${changePercentDisplay} ${changeValueDisplay}`;
   const networkLabel = tokenName
     ? t("browse.network_label", { name: tokenName })
@@ -61,6 +64,19 @@ const BrowseDetailScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea} edges={["top"]}>
       <View style={styles.container}>
+        <View style={styles.gradientWrapper} pointerEvents="none">
+          <LinearGradient
+            colors={[
+              "rgba(255, 255, 255, 0.08)",
+              "rgba(37, 39, 44, 0.4)",
+              "rgba(5, 5, 5, 0)",
+            ]}
+            locations={[0, 0.65, 1]}
+            start={{ x: 0.5, y: 0 }}
+            end={{ x: 0.5, y: 1 }}
+            style={styles.gradientOverlay}
+          />
+        </View>
         <View style={styles.customHeader}>
           <TouchableOpacity
             onPress={handleBackPress}
@@ -122,7 +138,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: responsiveWidth(24),
+    paddingTop: responsiveHeight(24),
     alignItems: "center",
+    overflow: "hidden",
+  },
+  gradientWrapper: {
+    ...StyleSheet.absoluteFillObject,
+    alignItems: "center",
+    justifyContent: "flex-start",
+    paddingTop: responsiveHeight(8),
+  },
+  gradientOverlay: {
+    width: responsiveWidth(350),
+    height: responsiveHeight(210),
+    borderRadius: responsiveHeight(150),
+    opacity: 0.25,
+    transform: [{ translateY: responsiveHeight(-45) }, { scaleX: 1.3 }],
   },
   customHeader: {
     width: "100%",
@@ -149,7 +180,7 @@ const styles = StyleSheet.create({
   },
   headerTitleText: {
     fontFamily: Fonts.satoshiMedium,
-    fontSize: responsiveFontSize(18),
+    fontSize: responsiveFontSize(24),
     color: Colors.textPrimary,
   },
   tokenHeader: {
@@ -173,8 +204,7 @@ const styles = StyleSheet.create({
   tokenNameText: {
     fontFamily: Fonts.satoshiRegular,
     fontSize: responsiveFontSize(14),
-    color: Colors.text,
-    marginTop: responsiveHeight(4),
+    color: Colors.text
   },
   section: {
     alignItems: "center",
@@ -183,7 +213,6 @@ const styles = StyleSheet.create({
   sectionLabel: {
     fontFamily: Fonts.satoshiRegular,
     fontSize: responsiveFontSize(14),
-    paddingTop: responsiveHeight(4),
     color: Colors.text,
   },
   priceValue: {
