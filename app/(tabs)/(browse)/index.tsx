@@ -73,8 +73,12 @@ const BrowseScreen = () => {
       <FlatList
         data={tokens}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <BrowseTokenItem token={item} onPress={handleTokenPress} />
+        renderItem={({ item, index }) => (
+          <BrowseTokenItem
+            token={item}
+            onPress={handleTokenPress}
+            isFirst={index === 0}
+          />
         )}
         onEndReached={handleEndReached}
         onEndReachedThreshold={0.3}

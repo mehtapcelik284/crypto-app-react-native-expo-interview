@@ -13,15 +13,16 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 type Props = {
   token: MarketToken;
   onPress?: (token: MarketToken) => void;
+  isFirst?: boolean;
 };
 
-const BrowseTokenItem = ({ token, onPress }: Props) => {
+const BrowseTokenItem = ({ token, onPress, isFirst }: Props) => {
   const changePositive = (token.price_change_percentage_24h ?? 0) >= 0;
   const changeDisplay = formatPercentage(token.price_change_percentage_24h ?? 0);
 
   return (
     <TouchableOpacity
-      style={styles.item}
+      style={[styles.item, isFirst && styles.firstItem]}
       activeOpacity={0.8}
       onPress={() => onPress?.(token)}
     >
@@ -65,8 +66,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: responsiveHeight(12),
+    paddingBottom: responsiveHeight(24),
     paddingHorizontal: responsiveWidth(8)
+  },
+  firstItem: {
+    paddingTop: responsiveHeight(12),
   },
   leftSection: {
     flexDirection: "row",
