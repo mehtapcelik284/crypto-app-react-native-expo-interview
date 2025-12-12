@@ -1,0 +1,22 @@
+{
+  "app_name": "KriptoK",
+  "tabs": {
+    "home": "Home",
+    "browse": "Browse"
+  },
+  "home": {
+    "title": "Home",
+    "assets": "Assets",
+    "empty": "No networks selected"
+  },
+  "browse": {
+    "title": "Browse",
+    "detail": "Detail {{id}}",
+    "price_label": "Price",
+    "market_cap_label": "Market Cap",
+    "network_label": "{{name}} Network"
+  },
+  "select_networks": {
+    "title": "Manage Assets"
+  }
+}

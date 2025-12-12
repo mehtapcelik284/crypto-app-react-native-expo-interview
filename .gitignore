@@ -42,7 +42,14 @@ app-example
 /ios
 /android
 
+<<<<<<< HEAD
+# environment files
+.env.development
+.env.staging
+.env.production
+=======
 # env files
 .env.development
 .env.staging
 .env.production
+>>>>>>> master

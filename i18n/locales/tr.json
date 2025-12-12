@@ -1,0 +1,22 @@
+{
+  "app_name": "KriptoK",
+  "tabs": {
+    "home": "Ana Sayfa",
+    "browse": "Göz At"
+  },
+  "home": {
+    "title": "Ana Sayfa",
+    "assets": "Varlıklar",
+    "empty": "Seçili ağ bulunmuyor"
+  },
+  "browse": {
+    "title": "Göz At",
+    "detail": "Detay {{id}}",
+    "price_label": "Fiyat",
+    "market_cap_label": "Piyasa Değeri",
+    "network_label": "{{name}} Ağı"
+  },
+  "select_networks": {
+    "title": "Varlıkları Yönet"
+  }
+}
