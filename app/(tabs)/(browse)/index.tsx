@@ -8,7 +8,13 @@ import {
   responsiveWidth,
 } from "@/utils/responsive";
 import React, { useMemo } from "react";
-import { FlatList, RefreshControl, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const BrowseScreen = () => {
@@ -31,6 +37,7 @@ const BrowseScreen = () => {
   const hasError = Boolean(errorMessage);
 
   const handleEndReached = () => {
+    if (hasError) return;
     if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }

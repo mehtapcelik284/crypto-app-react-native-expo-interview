@@ -20,6 +20,7 @@ export const Colors = {
     trackOff: "#8D96A3",
     thumbOff: "#49505B",
   },
+  loader: "#FFFFFF",
 };
 
 export const FontStyles = {

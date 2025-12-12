@@ -10,7 +10,7 @@ type Props = {
 const LoadingIndicator = ({ inline }: Props) => {
   return (
     <View style={inline ? styles.inlineContainer : styles.container}>
-      <ActivityIndicator color={Colors.tint} />
+      <ActivityIndicator color={Colors.loader} />
     </View>
   );
 };
