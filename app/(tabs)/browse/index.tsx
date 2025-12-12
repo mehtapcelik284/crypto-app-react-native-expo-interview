@@ -48,7 +48,7 @@ const BrowseScreen = () => {
 
   const handleTokenPress = (token: MarketToken) => {
     router.push({
-      pathname: "/(tabs)/(browse)/[id]",
+      pathname: "/(tabs)/browse/[id]",
       params: {
         id: token.id,
         name: token.name,
@@ -73,8 +73,12 @@ const BrowseScreen = () => {
       <FlatList
         data={tokens}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <BrowseTokenItem token={item} onPress={handleTokenPress} />
+        renderItem={({ item, index }) => (
+          <BrowseTokenItem
+            token={item}
+            onPress={handleTokenPress}
+            isFirst={index === 0}
+          />
         )}
         onEndReached={handleEndReached}
         onEndReachedThreshold={0.3}

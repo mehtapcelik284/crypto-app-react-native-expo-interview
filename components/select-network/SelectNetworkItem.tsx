@@ -33,7 +33,11 @@ const SelectNetworkItem = ({ asset, isEnabled, onToggle }: Props) => {
           <Text style={styles.assetSymbol}>{asset.symbol}</Text>
         </View>
       </View>
-      <Toggle isOn={isEnabled} onToggle={onToggle} />
+      <Toggle
+        isOn={isEnabled}
+        onToggle={onToggle}
+        testID={`select-network-toggle-${asset.id}`}
+      />
     </View>
   );
 };

@@ -5,12 +5,22 @@ import { ActivityIndicator, StyleSheet, View } from "react-native";
 
 type Props = {
   inline?: boolean;
+  testID?: string;
 };
 
-const LoadingIndicator = ({ inline }: Props) => {
+const LoadingIndicator = ({ inline, testID }: Props) => {
+  const containerTestID =
+    testID ?? (inline ? "loading-indicator-inline" : "loading-indicator");
+
   return (
-    <View style={inline ? styles.inlineContainer : styles.container}>
-      <ActivityIndicator color={Colors.loader} />
+    <View
+      style={inline ? styles.inlineContainer : styles.container}
+      testID={containerTestID}
+    >
+      <ActivityIndicator
+        color={Colors.loader}
+        testID={`${containerTestID}-spinner`}
+      />
     </View>
   );
 };

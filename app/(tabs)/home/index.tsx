@@ -51,6 +51,7 @@ const HomeScreen = () => {
               onPress={handleTogglePress}
               hitSlop={responsiveWidth(10)}
               style={styles.toggleButton}
+              testID="home-toggle-button"
             >
               <ToggleIconSVG size={responsiveWidth(18)} color={Colors.tint} />
             </TouchableOpacity>

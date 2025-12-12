@@ -1,6 +1,6 @@
 import { Colors, Fonts } from "@/constants/theme";
 import { MarketToken } from "@/services/api/markets";
-import { formatFiatValue } from "@/utils/formatters";
+import { formatFiatValue, formatPercentage } from "@/utils/formatters";
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -12,18 +12,20 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type Props = {
   token: MarketToken;
-  onPress?: (token: MarketToken) => void;
+  onPress?: (_: MarketToken) => void;
+  isFirst?: boolean;
 };
 
-const BrowseTokenItem = ({ token, onPress }: Props) => {
+const BrowseTokenItem = ({ token, onPress, isFirst }: Props) => {
   const changePositive = (token.price_change_percentage_24h ?? 0) >= 0;
-  const changeDisplay = `${changePositive ? "+" : ""}${(
+  const changeDisplay = formatPercentage(
     token.price_change_percentage_24h ?? 0
-  ).toFixed(2)}%`;
+  );
 
   return (
     <TouchableOpacity
-      style={styles.item}
+      testID={`browse-token-${token.id}`}
+      style={[styles.item, isFirst && styles.firstItem]}
       activeOpacity={0.8}
       onPress={() => onPress?.(token)}
     >
@@ -41,7 +43,9 @@ const BrowseTokenItem = ({ token, onPress }: Props) => {
       </View>
 
       <View style={styles.rightSection}>
-        <Text style={styles.priceText}>{formatFiatValue(token.current_price)}</Text>
+        <Text style={styles.priceText}>
+          {formatFiatValue(token.current_price)}
+        </Text>
         <View
           style={[
             styles.changePill,
@@ -51,7 +55,9 @@ const BrowseTokenItem = ({ token, onPress }: Props) => {
           <Text
             style={[
               styles.changeText,
-              changePositive ? styles.changePositiveText : styles.changeNegativeText,
+              changePositive
+                ? styles.changePositiveText
+                : styles.changeNegativeText,
             ]}
           >
             {changeDisplay}
@@ -67,8 +73,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: responsiveHeight(12),
-    paddingHorizontal: responsiveWidth(8)
+    paddingBottom: responsiveHeight(24),
+    paddingHorizontal: responsiveWidth(8),
+  },
+  firstItem: {
+    paddingTop: responsiveHeight(12),
   },
   leftSection: {
     flexDirection: "row",
@@ -130,17 +139,17 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.greenSurfaceDark,
   },
   changeNegative: {
-    backgroundColor: Colors.redDark
+    backgroundColor: Colors.redDark,
   },
   changeText: {
     fontFamily: Fonts.satoshiMedium,
     fontSize: responsiveFontSize(12),
   },
   changePositiveText: {
-    color: Colors.greenBright
+    color: Colors.greenBright,
   },
   changeNegativeText: {
-    color: Colors.redLight
+    color: Colors.redLight,
   },
 });
 

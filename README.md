@@ -1,50 +1,32 @@
-# Welcome to your Expo app 👋
+# Kriptok
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+React Native application bootstrapped with Expo Router.
 
-## Get started
+## Installation
 
-1. Install dependencies
+```bash
+npm install
+```
 
-   ```bash
-   npm install
-   ```
+## Running the project
 
-2. Start the app
+All commands will open the Expo CLI where you can launch Android, iOS, or web targets.
 
-   ```bash
-   npx expo start
-   ```
+- Development: `npm run start:dev`
+- Staging: `npm run start:staging`
+- Production preview: `npm run start:prod`
 
-In the output, you'll find options to open the app in a
+If you prefer the default Expo flow, you can still run `npm start` (or `npx expo start`).
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Linting & Tests
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- Lint the project: `npm run lint`
+- Run the Jest test suite: `npm test`
 
-## Get a fresh project
-
-When you're ready, run:
+## Resetting the template
 
 ```bash
 npm run reset-project
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+This moves the starter code to `app-example/` and creates a blank `app/` folder for a fresh start.
