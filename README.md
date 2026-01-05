@@ -1,4 +1,4 @@
-# Kriptok
+# Crypto-app
 
 React Native application bootstrapped with Expo Router.
 
